@@ -1,0 +1,7 @@
+student = {}
+n = int(input("No of students: "))
+for _ in range(n):
+    name = input()
+    marks = int(input())
+    student[name] = marks
+print(student)
