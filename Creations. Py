@@ -1,0 +1,31 @@
+import sqlite3
+
+conn = sqlite3.connect("student.db")
+cur = conn.cursor()
+
+# Create table
+cur.execute("CREATE TABLE IF NOT EXISTS Student(RollNo INT, Name TEXT, Marks INT)")
+
+# Insert data
+cur.execute("INSERT INTO Student VALUES (1,'Ravi',85)")
+cur.execute("INSERT INTO Student VALUES (2,'Sita',90)")
+
+# Display data
+print("Before Alter:")
+for row in cur.execute("SELECT * FROM Student"):
+    print(row)
+
+# Alter table (add column)
+cur.execute("ALTER TABLE Student ADD COLUMN Grade TEXT")
+
+# Update values
+cur.execute("UPDATE Student SET Grade='A' WHERE Marks>=90")
+cur.execute("UPDATE Student SET Grade='B' WHERE Marks<90")
+
+# Display updated data
+print("\nAfter Update:")
+for row in cur.execute("SELECT * FROM Student"):
+    print(row)
+
+conn.commit()
+conn.close()
