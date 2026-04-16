@@ -1,0 +1,24 @@
+import sqlite3
+
+conn = sqlite3.connect("student.db")
+cur = conn.cursor()
+
+Create table
+
+cur.execute("CREATE TABLE IF NOT EXISTS Student(roll INT, name TEXT, marks INT, dept TEXT)")
+
+Insert data
+
+cur.execute("INSERT INTO Student VALUES (1,'Ravi',85,'CSE')")
+cur.execute("INSERT INTO Student VALUES (2,'Sita',90,'ECE')")
+cur.execute("INSERT INTO Student VALUES (3,'Ram',70,'CSE')")
+cur.execute("INSERT INTO Student VALUES (4,'John',95,'ECE')")
+
+Select
+
+for row in cur.execute("SELECT * FROM Student"):
+print(row)
+
+conn.commit()
+conn.close()
+Give c program
