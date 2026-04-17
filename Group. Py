@@ -1,0 +1,10 @@
+import sqlite3
+
+conn = sqlite3.connect("student.db")
+cur = conn.cursor()
+
+# Execute GROUP BY query
+for row in cur.execute("SELECT dept, AVG(marks) FROM Student GROUP BY dept"):
+    print("Dept:", row[0], "Avg Marks:", row[1])
+
+conn.close()
