@@ -1,0 +1,25 @@
+import sqlite3
+conn = sqlite3.connect("student.db")
+cur = conn.cursor()
+
+# IN
+for row in cur.execute("SELECT name FROM Student WHERE dept IN ('CSE','ECE')"):
+    print(row)
+
+# ANY
+for row in cur.execute("SELECT name FROM Student WHERE marks > ANY (SELECT marks FROM Student WHERE dept='CSE')"):
+    print(row)
+
+# ALL
+for row in cur.execute("SELECT name FROM Student WHERE marks > ALL (SELECT marks FROM Student WHERE dept='CSE')"):
+    print(row)
+
+# EXISTS
+for row in cur.execute("SELECT name FROM Student WHERE EXISTS (SELECT * FROM Student WHERE marks>80)"):
+    print(row)
+
+# UNION
+for row in cur.execute("SELECT name FROM Student UNION SELECT name FROM Student"):
+    print(row)
+
+conn.close()
